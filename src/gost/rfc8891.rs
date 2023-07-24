@@ -1,19 +1,6 @@
-// Test vectors RFC8891
-// https://datatracker.ietf.org/doc/html/rfc8891.html#section-appendix.a
+//! Test vectors for [RFC8891, a.k.a GOST R 34.12-2015: Block Cipher "Magma", Appendix A.](https://datatracker.ietf.org/doc/html/rfc8891.html#section-appendix.a)
 
-pub const CIPHER_KEY: [u32; 8] = [
-    0xffeeddcc, 0xbbaa9988, 0x77665544, 0x33221100, 0xf0f1f2f3, 0xf4f5f6f7, 0xf8f9fafb, 0xfcfdfeff,
-];
-
-pub const CIPHER_KEY_U8_ARRAY: [u8; 32] = [
-    0xff, 0xee, 0xdd, 0xcc, 0xbb, 0xaa, 0x99, 0x88, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0x00,
-    0xf0, 0xf1, 0xf2, 0xf3, 0xf4, 0xf5, 0xf6, 0xf7, 0xf8, 0xf9, 0xfa, 0xfb, 0xfc, 0xfd, 0xfe, 0xff,
-];
-
-pub const PLAINTEXT: u64 = 0xfedcba9876543210_u64;
-
-pub const CIPHERTEXT: u64 = 0x4ee901e5c2d8ca3d_u64;
-
+/// [Section A.1. Transformation t](https://datatracker.ietf.org/doc/html/rfc8891.html#section-a.1)
 pub const TRANSFORMATION_T: [(u32, u32); 4] = [
     (0xfdb97531, 0x2a196f34),
     (0x2a196f34, 0xebd9f03a),
@@ -21,6 +8,7 @@ pub const TRANSFORMATION_T: [(u32, u32); 4] = [
     (0xb039bb3d, 0x68695433),
 ];
 
+/// [Section A.2. Transformation g](https://datatracker.ietf.org/doc/html/rfc8891.html#section-a.2)
 pub const TRANSFORMATION_G: [((u32, u32), u32); 4] = [
     ((0x87654321, 0xfedcba98), 0xfdcbc20c),
     ((0xfdcbc20c, 0x87654321), 0x7e791a4b),
@@ -28,6 +16,26 @@ pub const TRANSFORMATION_G: [((u32, u32), u32); 4] = [
     ((0xc76549ec, 0x7e791a4b), 0x9791c849),
 ];
 
+/// [Section A.3. Key Schedule](https://datatracker.ietf.org/doc/html/rfc8891.html#section-a.3)
+pub const CIPHER_KEY: [u32; 8] = [
+    0xffeeddcc, 0xbbaa9988, 0x77665544, 0x33221100, 0xf0f1f2f3, 0xf4f5f6f7, 0xf8f9fafb, 0xfcfdfeff,
+];
+
+/// [Section A.3. Key Schedule](https://datatracker.ietf.org/doc/html/rfc8891.html#section-a.3)
+pub const CIPHER_KEY_U8_ARRAY: [u8; 32] = [
+    0xff, 0xee, 0xdd, 0xcc, 0xbb, 0xaa, 0x99, 0x88, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0x00,
+    0xf0, 0xf1, 0xf2, 0xf3, 0xf4, 0xf5, 0xf6, 0xf7, 0xf8, 0xf9, 0xfa, 0xfb, 0xfc, 0xfd, 0xfe, 0xff,
+];
+
+/// [Section A.3. Key Schedule](https://datatracker.ietf.org/doc/html/rfc8891.html#section-a.3)
+pub const ROUND_KEYS: [u32; 32] = [
+    0xffeeddcc, 0xbbaa9988, 0x77665544, 0x33221100, 0xf0f1f2f3, 0xf4f5f6f7, 0xf8f9fafb, 0xfcfdfeff,
+    0xffeeddcc, 0xbbaa9988, 0x77665544, 0x33221100, 0xf0f1f2f3, 0xf4f5f6f7, 0xf8f9fafb, 0xfcfdfeff,
+    0xffeeddcc, 0xbbaa9988, 0x77665544, 0x33221100, 0xf0f1f2f3, 0xf4f5f6f7, 0xf8f9fafb, 0xfcfdfeff,
+    0xfcfdfeff, 0xf8f9fafb, 0xf4f5f6f7, 0xf0f1f2f3, 0x33221100, 0x77665544, 0xbbaa9988, 0xffeeddcc,
+];
+
+/// [Section A.4. Test Encryption](https://datatracker.ietf.org/doc/html/rfc8891.html#section-a.4)
 pub const TRANSFORMATION_BIG_G: [(u32, u32); 32] = [
     (0x76543210, 0x28da3b14),
     (0x28da3b14, 0xb14337a5),
@@ -63,9 +71,8 @@ pub const TRANSFORMATION_BIG_G: [(u32, u32); 32] = [
     (0xc2d8ca3d, 0x4ee901e5),
 ];
 
-pub const ROUND_KEYS: [u32; 32] = [
-    0xffeeddcc, 0xbbaa9988, 0x77665544, 0x33221100, 0xf0f1f2f3, 0xf4f5f6f7, 0xf8f9fafb, 0xfcfdfeff,
-    0xffeeddcc, 0xbbaa9988, 0x77665544, 0x33221100, 0xf0f1f2f3, 0xf4f5f6f7, 0xf8f9fafb, 0xfcfdfeff,
-    0xffeeddcc, 0xbbaa9988, 0x77665544, 0x33221100, 0xf0f1f2f3, 0xf4f5f6f7, 0xf8f9fafb, 0xfcfdfeff,
-    0xfcfdfeff, 0xf8f9fafb, 0xf4f5f6f7, 0xf0f1f2f3, 0x33221100, 0x77665544, 0xbbaa9988, 0xffeeddcc,
-];
+/// [Section A.4. Test Encryption](https://datatracker.ietf.org/doc/html/rfc8891.html#section-a.4)
+pub const PLAINTEXT: u64 = 0xfedcba9876543210_u64;
+
+/// [Section A.4. Test Encryption](https://datatracker.ietf.org/doc/html/rfc8891.html#section-a.4)
+pub const CIPHERTEXT: u64 = 0x4ee901e5c2d8ca3d_u64;
