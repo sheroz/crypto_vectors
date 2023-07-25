@@ -1,4 +1,11 @@
 //! Test vectors for [Block Cipher Modes, GOST R 34.13-2015](https://www.tc26.ru/standard/gost/GOST_R_3413-2015.pdf)  
+//! 
+//! * **ECB** - Electronic Codebook Mode
+//! * **CTR** - Counter Encryption Mode
+//! * **OFB** - Output Feedback Mode
+//! * **CBC** - Cipher Block Chaining Mode
+//! * **CFB** - Cipher Feedback Mode
+//! * **MAC** - Message Authentication Code Generation Mode
 
 /// Cipher Key, Page 35, Section: A.2
 pub const CIPHER_KEY: [u32; 8] = [

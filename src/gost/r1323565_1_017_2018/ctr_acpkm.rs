@@ -1,4 +1,4 @@
-//! Test Vectors for [CTR-ACPKM, RFC8645](https://www.rfc-editor.org/rfc/rfc8645.html) 
+//! Test Vectors for [**CTR-ACPKM** Ciphering Mode, RFC8645](https://www.rfc-editor.org/rfc/rfc8645.html) 
 //! 
 //! Test Vectors taken from [Р 1323565.1.017—2018](https://standartgost.ru/g/%D0%A0_1323565.1.017-2018),
 //! Page 11,
